@@ -12,7 +12,7 @@ export async function emberAndStoreDocs(
     try {
        const embeddings = new OpenAIEmbeddings(); // LLM API
        const index = client.Index(env.PINECONE_INDEX_NAME)
-       
+
        // embed the PDF documents
        await PineconeStore.fromDocuments(docs, embeddings, {
         pineconeIndex: index,
@@ -23,4 +23,22 @@ export async function emberAndStoreDocs(
         console.log("error", err);
         throw new Error("Failed to load your docs!")
     }
+}
+
+export async function getVectorStore(client: Pinecone) {
+    try {
+        const embeddings = new OpenAIEmbeddings(); // LLM
+        const index = client.Index(env.PINECONE_INDEX_NAME);
+
+        const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+            pineconeIndex: index,
+            textKey: "text",
+            namespace: env.PINECONE_NAMESPACE
+        });
+
+        return vectorStore
+    } catch (err) {
+        console.log("error", err);
+        throw new Error("Something went wrong while getting the vector store!")
+    } 
 }
