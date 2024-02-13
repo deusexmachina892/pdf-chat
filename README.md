@@ -1,12 +1,12 @@
 ## Personal PDF Chat
 
 <img width="821" alt="Screenshot 2024-02-13 at 8 50 28 PM" src="https://github.com/deusexmachina892/pdf-chat/assets/27721589/5de33dde-d9f0-4700-b367-07ed7fa2742c">
-<div style="width:20%; margin: auto;">Pic 1.1</div>
+<div style="width:100%; margin: auto;">Pic 1.1</div>
 
 
 
 <img width="811" alt="Screenshot 2024-02-13 at 8 46 31 PM" src="https://github.com/deusexmachina892/pdf-chat/assets/27721589/4241aa36-9d87-4f6c-babe-c9cdd5f41443">
-<div style="width:20%; margin: auto;">Pic 1.2</div>
+<div style="width:100%; margin: auto;">Pic 1.2</div>
 
 
 
