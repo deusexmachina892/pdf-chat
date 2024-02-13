@@ -5,7 +5,7 @@ import {
     AccordionTrigger
 } from "@/components/ui/accordion";
 import {
-    Card, CardContent, CardDescription, CardHeader, CardTitle
+    Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
 } from "@/components/ui/card";
 import { formattedSourceText } from "@/lib/utils";
 import { Message } from "ai/react";
@@ -55,28 +55,30 @@ export function ChatBubble({
                         {wrappedText}
                     </Balancer>
                 </CardContent>
-                <CardDescription className="w-full">
-                    {sources?.length? (
-                        <Accordion type="single" collapsible className="w-full">
-                            {
-                                sources.map((source: string, i: number) => (
-                                    <AccordionItem value={`source-${i}`} key={i}>
-                                        <AccordionTrigger>
-                                            {`Source ${i + 1}`}
-                                        </AccordionTrigger>
-                                        <AccordionContent>
-                                            <ReactMarkdown>
-                                                {formattedSourceText(source)}
-                                            </ReactMarkdown>
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                ))
-                            }
-                        </Accordion>
-                    ) : (
-                        <></>
-                    )}
-                </CardDescription>
+                <CardFooter>
+                    <CardDescription className="w-full">
+                        {sources?.length? (
+                            <Accordion type="single" collapsible className="w-full">
+                                {
+                                    sources.map((source: string, i: number) => (
+                                        <AccordionItem value={`source-${i}`} key={i}>
+                                            <AccordionTrigger>
+                                                {`Source ${i + 1}`}
+                                            </AccordionTrigger>
+                                            <AccordionContent>
+                                                <ReactMarkdown>
+                                                    {formattedSourceText(source)}
+                                                </ReactMarkdown>
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    ))
+                                }
+                            </Accordion>
+                        ) : (
+                            <></>
+                        )}
+                    </CardDescription>
+                </CardFooter>
             </Card>
         </div>
     )
