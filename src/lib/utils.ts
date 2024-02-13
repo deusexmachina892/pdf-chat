@@ -24,4 +24,32 @@ export const initialMessages: Message[] = [
     id: "0",
     content: "Hi! I am your assistant. I am happy to help with your questions about your source document."
   }
-]
+];
+
+export function scrollToEnd(containerRef: React.RefObject<HTMLElement>) {
+  if(containerRef.current) {
+    const lastMessage = containerRef.current.lastElementChild;
+    if(lastMessage) {
+      const scrollOptions: ScrollIntoViewOptions = {
+        behavior: "smooth",
+        block: "end"
+      };
+      lastMessage.scrollIntoView(scrollOptions);
+    }
+  }
+}
+
+export interface Data {
+  sources: string[]; // Replace 'any' with a more specific type if possible
+}
+// source mapper
+export const getSources = (data: any, role: string, index: number) => {
+  if (role === "assistant" && index >= 2 && (index % 2 === 0)) {
+    const sourceIndex = (index - 2)/2;
+    if (data[sourceIndex] && data[sourceIndex].sources) {
+      return data[sourceIndex].sources;
+    }
+  }
+
+  return [];
+}

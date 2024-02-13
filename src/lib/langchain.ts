@@ -19,7 +19,11 @@ export async function callChain({ question, chatHistory }: CallChainArgs) {
         const sanitizedQuestion = question.trim().replaceAll("\n", " ");
         const pineconeClient = await getPineconeClient();
         const vectorStore = await getVectorStore(pineconeClient);
-        const { stream, handlers } = LangChainStream();
+        const { stream, handlers } = LangChainStream({
+            experimental_streamData: true
+        });
+
+        const data = new experimental_StreamData();
 
         const chain = ConversationalRetrievalQAChain.fromLLM(
             streamingModel,
@@ -40,8 +44,18 @@ export async function callChain({ question, chatHistory }: CallChainArgs) {
                 chat_history: chatHistory,
             },
             [handlers]
-        );
-        return new StreamingTextResponse(stream);
+        ).then(async (res) => {
+            const sourceDocuments = res?.sourceDocuments;
+            const firstTwoDocuments = sourceDocuments.slice(0, 2);
+            const pageContents = firstTwoDocuments.map(
+                ({ pageContent }: { pageContent: string }) => pageContent
+            );
+            data.append({
+                sources: pageContents
+            });
+            data.close();
+        });
+        return new StreamingTextResponse(stream, {}, data);
     } catch (err) {
         console.error(err);
         throw new Error("Call chain method failed to execute!");
