@@ -9,7 +9,7 @@ Pic 1.1
 
 <img width="811" alt="Screenshot 2024-02-13 at 8 46 31 PM" src="https://github.com/deusexmachina892/pdf-chat/assets/27721589/4241aa36-9d87-4f6c-babe-c9cdd5f41443">
 <p style="text-align: center;">
-Pic 1.1
+Pic 1.2
 </p>
 
 
